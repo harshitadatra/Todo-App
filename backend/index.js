@@ -31,7 +31,7 @@ app.get("/todos", async function (req, res) {
   });
 });
 
-app.put("/completed", function (req, res) {
+app.put("/completed", async function (req, res) {
   const updatePayload = req.body;
   const parsedPayload = updateTodo.safeParse(updatePayload);
 
@@ -40,6 +40,17 @@ app.put("/completed", function (req, res) {
       msg: "You sent the wrong inputs",
     });
   }
+  await todo.update(
+    {
+      _id: req.body.id,
+    },
+    {
+      completed: true,
+    }
+  );
 
+  res.json({
+    msg: "Tdo marked as completed",
+  });
   return;
 });
