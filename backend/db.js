@@ -5,7 +5,7 @@ mongoose.connect("url");
 const todoSchema = mongoose.Schema({
   title: String,
   description: String,
-  completed: String,
+  completed: Boolean,
 });
 
 const todo = mongoose.model("todos", todoSchema);
